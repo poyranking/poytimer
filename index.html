@@ -5594,7 +5594,10 @@ var UI = {
             var s = Sound.sounds[e];
             if (s) {
                 var r = s.audio;
-                r && r.readyState && (r.currentTime = (s.offset + offset + timerDelay) / 1000, r.play());
+                try {
+                    r /*&& r.readyState*/ && (r.currentTime = (s.offset + offset + timerDelay) / 1000, r.play());
+                } catch (err) {
+                }
             }
         //}
         /*
@@ -5615,7 +5618,10 @@ var UI = {
         //if ("undefined" != typeof chrome && !isIOS) {
             this.files.forEach(function(e) {
                 var r = Sound.sounds[e.name].audio;
-                r && r.readyState && (r.pause(), r.currentTime = 0);
+                try {
+                    r /*&& r.readyState*/ && (r.pause(), r.currentTime = 0);
+                } catch (err) {
+                }
             });
         //}
     },
