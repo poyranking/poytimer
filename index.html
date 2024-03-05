@@ -13,7 +13,7 @@
     </style>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAABMLAAATCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3YhAAN3eAMJg8IGDozgBg6O4gIIhcwAAnuSAAN4PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3VhBw+X7hcm1f8cL/n/HjT//yQ7//8tQvX/KjrT/wwUoP8AAn26AAR6JwAAAAAAAAAAAAAAAAAAAAAABHZWChSz/hAi//8UKf//N0z//1Fn//9IYP//K0T//x85//82Tv//JjTH/wEFheQAA3g0AAAAAAAAAAAABHUYBhCy7AYV//8xQt7/0dby//////////////////7///+7x///QFn//yZB//82Rt3/AQWE5gAEeCUAAAAAAQeIdwMR//8aKNX/4ePZ//////////////////////////////////////9Ua///JkH//yo4yP8AAnq6AAAAAAEKucMBC/L/foS3/////P///////////////////////////////////////////0Fa//8ySP//CxOZ/wADdz4ACd3iCxbG/8fIyP//////////////////////////////+//////////////////N1f//ITv//zA/0v8AAnelAAbk4RUgtf/a2tL/////////////////YGBe/yAkWv91ftn/2t3e////+////////////0FZ//8rQPL/Agh/0wAG48MPGrL/z9HN/////////////////ykpI/8AAAn/EB3l/yUx7P90fd7/6+71//////92if//HTL+/wUNiOEACdx/Awu//6Smuv////b///////////+QkI//BgYF/8fIyP/s7///0df///X5////////g5X//xkt//8FDYngAAjKHwAI4PNPWKr/9vbh////////////7/Hu/xQUFP+vsaz//////////////////////2R4//8aLPb/AwmBygAAAAADDuqNBxG6/6Souf/+/+7///////////9hYWD/kJGP//////////////////////8pP///HCvW/wAEd4EAAAAAAAjHCgQP6sIZJK//sbW/////7///////y83I/6ippv////////////////9+jv//EST//wkSmewAA3YZAAAAAAAAAAABCc0TBRDsvQ0YwP9sdLH/2drS////6////+f///////////97if//DyD//w0YuvoAA3ZPAAAAAAAAAAAAAAAAAAAAAAEIywkFEOqIBA/g8hYiyP9CTMj/X2rW/1hj5/8mN///BxX//wgSv+IABH9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEK0SEBCt1lAAnkpgAJ584ACOPOAAjNpAEIplwABIkUAAAAAAAAAAAAAAAA4B9yc8AHdWKAA2MAAAFKQQABPUMAAFByAAByYQAARmkAAHNcAAB2YQAAcmWAAGxpgABleMABUVTgA3Zh+AdpcA==">
-    <!--<link type="text/css" rel="stylesheet" href="tpt.css?v=18">-->
+    <!--<link type="text/css" rel="stylesheet" href="tpt.css?v=21">-->
     <style>
 html,body,#root {
     width: 100%;
@@ -1389,7 +1389,7 @@ html.can-touch .tab-button:active {
     position: absolute;
     display: block;
     width: 74px;
-    height: 184px;
+    height: 244px;
     left: 0px;
     top: 0px;
     z-index: 1;
@@ -1403,17 +1403,18 @@ html.can-touch .tab-button:active {
 .chip-color {
     position: relative;
     display: block;
-    box-sizing: content-box;
-    width: 62px;
-    height: 22px;
+    box-sizing: border-box;
+    width: 66px;
+    height: 26px;
     background: #fefefe;
     color: #fefefe;
     text-align: center;
     font-weight: bold;
-    margin: 4px;
+    margin: 4px 4px 0px;
     padding: 2px;
     cursor: pointer;
     border-radius: 2px;
+    border: none;
 }
 #chipColor1 {
     color: #1b45bb;
@@ -1430,34 +1431,48 @@ html.can-touch .tab-button:active {
 #chipColor5 {
     background: #2B2A29;
 }
+#chipColor6 {
+    background: #f4c700;
+}
 #chipColorCustom {
-    position: relative;
-    display: block;
-    width: 66px;
-    height: 26px;
-    margin: 4px;
-    border-radius: 2px;
-    background-color: #fefefe;
-    color: #303030;
-    font-weight: bold;
-    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
     padding: 0px;
-    border: none;
-    cursor: pointer;
 }
-.chip-color:hover, #chipColorCustom:hover {
-    box-shadow: 0px 0px 2px -1px #aaa;
+#chipColorCustom::-webkit-color-swatch-wrapper {
+	padding: 0;
 }
-.chip-color:active:hover, #chipColorCustom:active:hover {
-    box-shadow: 0px 0px 2px 0px #aaa;
+#chipColorCustom::-webkit-color-swatch {
+	border: none;
+  border-radius: 2px;
 }
-.chip-color:focus, #chipColorCustom:focus { /* fallback for browsers that don't support :focus-visible */
+#chipColorCustom::-moz-color-swatch { /* -moz prefix must be defined separate from -webkit prefix otherwise it won't work on webkit based browsers! */
+	border: none;
+  border-radius: 2px;
+}
+#chipColorCustomOverlay {
+    pointer-events: none;
+    margin: -26px 4px 0px;
+    background-color: transparent;
+}
+#chipColorNone {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.chip-color:not(.selected):hover {
+    box-shadow: 0px 0px 0px 2px #999;
+}
+.chip-color.selected, .chip-color:not(.selected):active:hover {
+    box-shadow: 0px 0px 0px 2px #ddd;
+}
+.chip-color:focus { /* fallback for browsers that don't support :focus-visible */
     outline: 1px solid #666;
 }
-.chip-color:focus:not(:focus-visible), #chipColorCustom:focus:not(:focus-visible) { /* remove focus indicator on mouse-focus for browsers that do support :focus-visible */
+.chip-color:focus:not(:focus-visible) { /* remove focus indicator on mouse-focus for browsers that do support :focus-visible */
     outline: none;
 }
-.chip-color:focus-visible, #chipColorCustom:focus-visible { /* focus style for keyboard-focus on browsers that do support :focus-visible */
+.chip-color:focus-visible { /* focus style for keyboard-focus on browsers that do support :focus-visible */
     outline: 1px solid #666;
     outline-offset: 1px;
 }
@@ -1539,7 +1554,7 @@ html.can-touch .tab-button:active {
 
 #chips_config_wrapper {
     position: relative;
-    width: 390px;
+    width: 464px;
     height: 126px;
     margin: 10px 40px;
     border-radius: 4px;
@@ -1598,6 +1613,7 @@ html.can-touch .tab-button:active {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
+    box-sizing: border-box;
 }
 .chip-config-button:hover {
     box-shadow: 0px 0px 10px -1px #fff;
@@ -1844,18 +1860,13 @@ html.can-touch .tab-button:active {
         margin-left: -5px;
     }
     .chip-color {
-        width: 38px;
-        font-size: 11px;
-        font-weight: normal;
-    }
-    #chipColorCustom {
         width: 42px;
         font-size: 11px;
         font-weight: normal;
     }
 
     #chips_config_wrapper {
-        width: 260px;
+        width: 310px;
         height: 110px;
         margin: 10px 35px;
     }
@@ -1885,6 +1896,16 @@ html.can-touch .tab-button:active {
     }
     #chips_config input[type=number] {
         font-size: 14px;
+    }
+}
+@media screen and (max-width: 499px) {
+    #chips_config_wrapper {
+        margin: 10px 15px;
+    }
+}
+@media screen and (max-width: 399px) {
+    #preferencesPage {
+        margin: 15px 5px;
     }
 }
 
@@ -2890,6 +2911,7 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
     background-size: 100% 100%;
     overflow: visible;
     transition: width 200ms linear, height 200ms linear, margin 200ms linear;
+    box-sizing: border-box;
 }
 .chip-value {
     position: absolute;
@@ -2904,7 +2926,7 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
     padding-top: 5px;
     transition: width 200ms linear, left 200ms linear, font-size 200ms linear;
 }
-@media screen and (min-width: 400px) and (min-height: 490px) {
+@media screen and (min-width: 480px) and (min-height: 490px) {
     #chips {
         height: 84px;
     }
@@ -2919,7 +2941,7 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         font-size: 20px;
     }
 }
-@media screen and (min-width: 500px) and (min-height: 650px) {
+@media screen and (min-width: 600px) and (min-height: 650px) {
     #chips {
         height: 100px;
     }
@@ -2934,7 +2956,7 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         font-size: 24px;
     }
 }
-@media screen and (min-width: 650px) and (min-height: 720px) {
+@media screen and (min-width: 780px) and (min-height: 720px) {
     #chips {
         height: 124px;
     }
@@ -2968,6 +2990,17 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
 .chip-black {
     /* encodeURIComponent('<svg width="100" height="100" viewBox="0 0 3000 3000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><circle fill="#2B2A29" cx="1500" cy="1500" r="1500"/><path fill="#FEFEFE" d="M1229 2975c181,33 365,32 542,-1l0 -328 -542 0 0 329zm833 -751l42 72c-67,51 -140,93 -217,125l-42 -73c77,-31 150,-73 217,-124zm-437 183l0 84c-82,11 -166,11 -250,1l0 -84c84,11 168,11 250,-1zm-729 -110l42 -73c32,25 67,49 104,70 36,21 74,39 112,55l-42 73c-38,-16 -75,-35 -112,-56 -37,-21 -71,-44 -104,-69zm-808 -295l284 -164 271 469 -285 165c-119,-140 -209,-300 -270,-470zm2261 -156l73 42c-16,38 -35,75 -56,112 -21,37 -44,71 -69,104l-73 -42c25,-32 49,-67 70,-104 21,-36 39,-74 55,-112zm-1646 -950l73 42c-25,32 -49,67 -70,104 -21,36 -39,74 -55,112l-73 -42c16,-38 35,-75 56,-112 21,-37 44,-71 69,-104zm410 -317l42 73c-77,31 -150,73 -217,124l-42 -72c67,-51 140,-93 217,-125zm512 -71l0 84c-84,-11 -168,-11 -250,1l0 -84c83,-11 166,-11 250,-1zm221 143l42 -73c38,16 75,35 112,56 37,21 71,44 104,69l-42 73c-32,-25 -67,-49 -104,-70 -36,-21 -74,-39 -112,-55zm561 724l84 0c11,83 11,166 1,250l-84 0c11,-83 11,-168 -1,-250zm-1899 0l84 0c-11,84 -11,168 1,250l-84 0c-11,-82 -11,-166 -1,-250zm1716 -437l72 -42c51,67 93,140 125,217l-73 42c-31,-77 -73,-150 -124,-217zm-1645 949l73 -42c31,77 73,150 124,217l-72 42c-51,-67 -93,-140 -125,-217zm2333 -889c-61,-170 -151,-330 -270,-470l-285 165 271 469 284 -164zm-1141 -973l0 329 -542 0 0 -328c178,-33 361,-34 542,-1zm-1413 503l285 165 -271 469 -285 -165c30,-84 68,-167 114,-247 46,-80 99,-154 157,-222zm2284 1944c58,-68 111,-142 157,-222 46,-80 84,-163 114,-247l-285 -165 -271 469 285 165z"/></svg>') */
     background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%203000%203000%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ccircle%20fill%3D%22%232B2A29%22%20cx%3D%221500%22%20cy%3D%221500%22%20r%3D%221500%22%2F%3E%3Cpath%20fill%3D%22%23FEFEFE%22%20d%3D%22M1229%202975c181%2C33%20365%2C32%20542%2C-1l0%20-328%20-542%200%200%20329zm833%20-751l42%2072c-67%2C51%20-140%2C93%20-217%2C125l-42%20-73c77%2C-31%20150%2C-73%20217%2C-124zm-437%20183l0%2084c-82%2C11%20-166%2C11%20-250%2C1l0%20-84c84%2C11%20168%2C11%20250%2C-1zm-729%20-110l42%20-73c32%2C25%2067%2C49%20104%2C70%2036%2C21%2074%2C39%20112%2C55l-42%2073c-38%2C-16%20-75%2C-35%20-112%2C-56%20-37%2C-21%20-71%2C-44%20-104%2C-69zm-808%20-295l284%20-164%20271%20469%20-285%20165c-119%2C-140%20-209%2C-300%20-270%2C-470zm2261%20-156l73%2042c-16%2C38%20-35%2C75%20-56%2C112%20-21%2C37%20-44%2C71%20-69%2C104l-73%20-42c25%2C-32%2049%2C-67%2070%2C-104%2021%2C-36%2039%2C-74%2055%2C-112zm-1646%20-950l73%2042c-25%2C32%20-49%2C67%20-70%2C104%20-21%2C36%20-39%2C74%20-55%2C112l-73%20-42c16%2C-38%2035%2C-75%2056%2C-112%2021%2C-37%2044%2C-71%2069%2C-104zm410%20-317l42%2073c-77%2C31%20-150%2C73%20-217%2C124l-42%20-72c67%2C-51%20140%2C-93%20217%2C-125zm512%20-71l0%2084c-84%2C-11%20-168%2C-11%20-250%2C1l0%20-84c83%2C-11%20166%2C-11%20250%2C-1zm221%20143l42%20-73c38%2C16%2075%2C35%20112%2C56%2037%2C21%2071%2C44%20104%2C69l-42%2073c-32%2C-25%20-67%2C-49%20-104%2C-70%20-36%2C-21%20-74%2C-39%20-112%2C-55zm561%20724l84%200c11%2C83%2011%2C166%201%2C250l-84%200c11%2C-83%2011%2C-168%20-1%2C-250zm-1899%200l84%200c-11%2C84%20-11%2C168%201%2C250l-84%200c-11%2C-82%20-11%2C-166%20-1%2C-250zm1716%20-437l72%20-42c51%2C67%2093%2C140%20125%2C217l-73%2042c-31%2C-77%20-73%2C-150%20-124%2C-217zm-1645%20949l73%20-42c31%2C77%2073%2C150%20124%2C217l-72%2042c-51%2C-67%20-93%2C-140%20-125%2C-217zm2333%20-889c-61%2C-170%20-151%2C-330%20-270%2C-470l-285%20165%20271%20469%20284%20-164zm-1141%20-973l0%20329%20-542%200%200%20-328c178%2C-33%20361%2C-34%20542%2C-1zm-1413%20503l285%20165%20-271%20469%20-285%20-165c30%2C-84%2068%2C-167%20114%2C-247%2046%2C-80%2099%2C-154%20157%2C-222zm2284%201944c58%2C-68%20111%2C-142%20157%2C-222%2046%2C-80%2084%2C-163%20114%2C-247l-285%20-165%20-271%20469%20285%20165z%22%2F%3E%3C%2Fsvg%3E');
+}
+.chip-yellow {
+    /* encodeURIComponent('<svg width="100" height="100" viewBox="0 0 3000 3000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><circle fill="#f4c700" cx="1500" cy="1500" r="1500"/><path fill="#FEFEFE" d="M1229 2975c181,33 365,32 542,-1l0 -328 -542 0 0 329zm833 -751l42 72c-67,51 -140,93 -217,125l-42 -73c77,-31 150,-73 217,-124zm-437 183l0 84c-82,11 -166,11 -250,1l0 -84c84,11 168,11 250,-1zm-729 -110l42 -73c32,25 67,49 104,70 36,21 74,39 112,55l-42 73c-38,-16 -75,-35 -112,-56 -37,-21 -71,-44 -104,-69zm-808 -295l284 -164 271 469 -285 165c-119,-140 -209,-300 -270,-470zm2261 -156l73 42c-16,38 -35,75 -56,112 -21,37 -44,71 -69,104l-73 -42c25,-32 49,-67 70,-104 21,-36 39,-74 55,-112zm-1646 -950l73 42c-25,32 -49,67 -70,104 -21,36 -39,74 -55,112l-73 -42c16,-38 35,-75 56,-112 21,-37 44,-71 69,-104zm410 -317l42 73c-77,31 -150,73 -217,124l-42 -72c67,-51 140,-93 217,-125zm512 -71l0 84c-84,-11 -168,-11 -250,1l0 -84c83,-11 166,-11 250,-1zm221 143l42 -73c38,16 75,35 112,56 37,21 71,44 104,69l-42 73c-32,-25 -67,-49 -104,-70 -36,-21 -74,-39 -112,-55zm561 724l84 0c11,83 11,166 1,250l-84 0c11,-83 11,-168 -1,-250zm-1899 0l84 0c-11,84 -11,168 1,250l-84 0c-11,-82 -11,-166 -1,-250zm1716 -437l72 -42c51,67 93,140 125,217l-73 42c-31,-77 -73,-150 -124,-217zm-1645 949l73 -42c31,77 73,150 124,217l-72 42c-51,-67 -93,-140 -125,-217zm2333 -889c-61,-170 -151,-330 -270,-470l-285 165 271 469 284 -164zm-1141 -973l0 329 -542 0 0 -328c178,-33 361,-34 542,-1zm-1413 503l285 165 -271 469 -285 -165c30,-84 68,-167 114,-247 46,-80 99,-154 157,-222zm2284 1944c58,-68 111,-142 157,-222 46,-80 84,-163 114,-247l-285 -165 -271 469 285 165z"/></svg>') */
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%203000%203000%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%3Ccircle%20fill%3D%22%23f4c700%22%20cx%3D%221500%22%20cy%3D%221500%22%20r%3D%221500%22%2F%3E%3Cpath%20fill%3D%22%23FEFEFE%22%20d%3D%22M1229%202975c181%2C33%20365%2C32%20542%2C-1l0%20-328%20-542%200%200%20329zm833%20-751l42%2072c-67%2C51%20-140%2C93%20-217%2C125l-42%20-73c77%2C-31%20150%2C-73%20217%2C-124zm-437%20183l0%2084c-82%2C11%20-166%2C11%20-250%2C1l0%20-84c84%2C11%20168%2C11%20250%2C-1zm-729%20-110l42%20-73c32%2C25%2067%2C49%20104%2C70%2036%2C21%2074%2C39%20112%2C55l-42%2073c-38%2C-16%20-75%2C-35%20-112%2C-56%20-37%2C-21%20-71%2C-44%20-104%2C-69zm-808%20-295l284%20-164%20271%20469%20-285%20165c-119%2C-140%20-209%2C-300%20-270%2C-470zm2261%20-156l73%2042c-16%2C38%20-35%2C75%20-56%2C112%20-21%2C37%20-44%2C71%20-69%2C104l-73%20-42c25%2C-32%2049%2C-67%2070%2C-104%2021%2C-36%2039%2C-74%2055%2C-112zm-1646%20-950l73%2042c-25%2C32%20-49%2C67%20-70%2C104%20-21%2C36%20-39%2C74%20-55%2C112l-73%20-42c16%2C-38%2035%2C-75%2056%2C-112%2021%2C-37%2044%2C-71%2069%2C-104zm410%20-317l42%2073c-77%2C31%20-150%2C73%20-217%2C124l-42%20-72c67%2C-51%20140%2C-93%20217%2C-125zm512%20-71l0%2084c-84%2C-11%20-168%2C-11%20-250%2C1l0%20-84c83%2C-11%20166%2C-11%20250%2C-1zm221%20143l42%20-73c38%2C16%2075%2C35%20112%2C56%2037%2C21%2071%2C44%20104%2C69l-42%2073c-32%2C-25%20-67%2C-49%20-104%2C-70%20-36%2C-21%20-74%2C-39%20-112%2C-55zm561%20724l84%200c11%2C83%2011%2C166%201%2C250l-84%200c11%2C-83%2011%2C-168%20-1%2C-250zm-1899%200l84%200c-11%2C84%20-11%2C168%201%2C250l-84%200c-11%2C-82%20-11%2C-166%20-1%2C-250zm1716%20-437l72%20-42c51%2C67%2093%2C140%20125%2C217l-73%2042c-31%2C-77%20-73%2C-150%20-124%2C-217zm-1645%20949l73%20-42c31%2C77%2073%2C150%20124%2C217l-72%2042c-51%2C-67%20-93%2C-140%20-125%2C-217zm2333%20-889c-61%2C-170%20-151%2C-330%20-270%2C-470l-285%20165%20271%20469%20284%20-164zm-1141%20-973l0%20329%20-542%200%200%20-328c178%2C-33%20361%2C-34%20542%2C-1zm-1413%20503l285%20165%20-271%20469%20-285%20-165c30%2C-84%2068%2C-167%20114%2C-247%2046%2C-80%2099%2C-154%20157%2C-222zm2284%201944c58%2C-68%20111%2C-142%20157%2C-222%2046%2C-80%2084%2C-163%20114%2C-247l-285%20-165%20-271%20469%20285%20165z%22%2F%3E%3C%2Fsvg%3E');
+}
+.chip-none {
+    background-image: none;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.chip.chip-none {
+    display: none;
 }
 
 /* with chips vertically on left side */
@@ -3024,13 +3057,13 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (max-width: 49
         left: 97px;
     }
 }
-@media screen and (min-width: 420px) and (max-height: 299px) {
+@media screen and (min-width: 420px) and (max-height: 349px) {
     #chips {
         justify-content: space-between;
     }
 }
-@media screen and (min-width: 420px) and (max-height: 489px) and (min-height: 420px),
-screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 420px) {
+@media screen and (min-width: 420px) and (max-height: 489px) and (min-height: 440px),
+screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 440px) {
     #topl_sect.show-chips #progress-gutter {
         width: calc(100% - 80px);
         margin-left: 80px;
@@ -3048,10 +3081,10 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         width: 70px;
         left: -15px;
         font-size: 20px;
-        padding-top: 5px;
+        padding-top: 0px;
     }
 }
-@media screen and (min-width: 600px) and (min-aspect-ratio: 120/100) and (min-height: 500px) {
+@media screen and (min-width: 600px) and (min-aspect-ratio: 120/100) and (min-height: 560px) {
     #topl_sect.show-chips #progress-gutter {
         width: calc(100% - 110px);
         margin-left: 110px;
@@ -3069,10 +3102,10 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         width: 100px;
         left: -25px;
         font-size: 28px;
-        padding-top: 5px;
+        padding-top: 0px;
     }
 }
-@media screen and (min-width: 870px) and (min-aspect-ratio: 120/100) and (min-height: 600px) {
+@media screen and (min-width: 870px) and (min-aspect-ratio: 120/100) and (min-height: 680px) {
     #topl_sect.show-chips #progress-gutter {
         width: calc(100% - 140px);
         margin-left: 140px;
@@ -3090,10 +3123,10 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         width: 130px;
         left: -35px;
         font-size: 36px;
-        padding-top: 5px;
+        padding-top: 0px;
     }
 }
-@media screen and (min-width: 1020px) and (min-aspect-ratio: 120/100) and (min-height: 800px) {
+@media screen and (min-width: 1020px) and (min-aspect-ratio: 120/100) and (min-height: 890px) {
     #topl_sect.show-chips #progress-gutter {
         width: calc(100% - 170px);
         margin-left: 170px;
@@ -3111,7 +3144,28 @@ screen and (min-width: 420px) and (min-aspect-ratio: 120/100) and (min-height: 4
         width: 160px;
         left: -40px;
         font-size: 44px;
-        padding-top: 5px;
+        padding-top: 0px;
+    }
+}
+@media screen and (min-width: 1020px) and (min-aspect-ratio: 120/100) and (min-height: 1010px) {
+    #topl_sect.show-chips #progress-gutter {
+        width: calc(100% - 170px);
+        margin-left: 170px;
+    }
+    #chips_wrap {
+        width: 170px;
+        max-width: 170px;
+    }
+    .chip {
+        width: 100px;
+        height: 100px;
+        margin: 0px 0px 48px;
+    }
+    .chip-value {
+        width: 160px;
+        left: -30px;
+        font-size: 44px;
+        padding-top: 0px;
     }
 }
 
@@ -3447,7 +3501,7 @@ body:not(.ios) #dialog-add-player input {
     color: #FFF
 }
     </style>
-    <!--<script src="main.js?v=8" async="">-->
+    <!--<script src="main.js?v=10" async=""></script>-->
     <script>
 /*
 //override console logging methods (can be used for debugging on mobile devices) -> requires a readonly textarea element with id mobileLog in the html page
@@ -3885,7 +3939,7 @@ function Value(e, t, n) {
             var e = e + "";
             return e === z ? 0 : e.replace(/[^0-9\.]/gi, "")
         }
-    }
+      }
       , M = j.format
       , R = j.unformat;
     r.call(this, b.format),
@@ -4009,6 +4063,27 @@ function Value(e, t, n) {
     this.toString = this.get,
     this.valueOf = this.value,
     this.toJSON = this.value
+}
+function Text(e) {
+    function h() {
+        for (var n = 0, i = N.length; i > n; n++)
+            N[n].call(g, g)
+    }
+    var g = this,
+        N = [];
+    this.val = e,
+    this.listener = null,
+    this.subscribe = function(listener) {
+        N.push(listener);
+    },
+    this.get = function() {
+        return this.val;
+    },
+    this.set = function(val) {
+        this.val = val;
+        h();
+        return this;
+    }
 }
 function resizeUIElems() {
     UI.progress.reset_width(),
@@ -6531,7 +6606,7 @@ $.fn.inputValueBind = function(e) {
         n.val(e.get())
     }
     var n = this;
-    return this.is("input") && e instanceof Value && (t(e),
+    return this.is("input") && (e instanceof Value || e instanceof Text) && (t(e),
     e.subscribe(t),
     n.change(function() {
         var t = n.val();
@@ -6546,7 +6621,7 @@ $.fn.inputValueBind = function(e) {
 ,
 $.fn.inputsPartsMerge = function(e) {
     for (var t in e)
-        if (e[t]instanceof Value) {
+        if (e[t] instanceof Value || e[t] instanceof Text) {
             var n = this.find("input[name=" + t + "]");
             n[0] && n.inputValueBind(e[t])
         }
@@ -6840,7 +6915,7 @@ var Origin = {
 ;
 Platform.storage.get = function(e, t) {
     /*t && t('{"default":{"meta":{"name":"Default"},"parts":[{"type":"round","blinds_small":10,"blinds_big":20,"ante":0,"duration":1800000},{"type":"round","blinds_small":15,"blinds_big":30,"ante":0,"duration":1800000},{"type":"round","blinds_small":20,"blinds_big":40,"ante":0,"duration":1800000},{"type":"round","blinds_small":25,"blinds_big":50,"ante":0,"duration":1800000},{"type":"round","blinds_small":50,"blinds_big":100,"ante":0,"duration":1800000},{"type":"round","blinds_small":75,"blinds_big":150,"ante":0,"duration":1800000},{"type":"break","duration":600000},{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":1800000},{"type":"round","blinds_small":150,"blinds_big":300,"ante":0,"duration":1800000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":1800000},{"type":"round","blinds_small":300,"blinds_big":600,"ante":0,"duration":1800000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":1800000},{"type":"round","blinds_small":500,"blinds_big":1000,"ante":0,"duration":1800000},{"type":"break","duration":600000},{"type":"round","blinds_small":600,"blinds_big":1200,"ante":0,"duration":1800000},{"type":"round","blinds_small":800,"blinds_big":1600,"ante":0,"duration":1800000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":1800000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03],"chipvalues":[{"color":"white","value":5},{"color":"red","value":25},{"color":"green","value":100},{"color":"blue","value":500},{"color":"black","value":1000}]}}')*/
-    t && t('{"default":{"meta":{"name":"Default"},"parts":[{"type":"round","blinds_small":50,"blinds_big":50,"ante":0,"duration":1800000},{"type":"round","blinds_small":50,"blinds_big":100,"ante":0,"duration":1800000},{"type":"round","blinds_small":100,"blinds_big":150,"ante":0,"duration":1800000},{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":1800000},{"type":"round","blinds_small":150,"blinds_big":300,"ante":0,"duration":1800000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":1800000},{"type":"break","duration":600000},{"type":"round","blinds_small":300,"blinds_big":600,"ante":0,"duration":1800000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":1800000},{"type":"round","blinds_small":500,"blinds_big":1000,"ante":0,"duration":1500000},{"type":"round","blinds_small":700,"blinds_big":1400,"ante":0,"duration":1500000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":1200000},{"type":"round","blinds_small":1500,"blinds_big":3000,"ante":0,"duration":1200000},{"type":"round","blinds_small":2000,"blinds_big":4000,"ante":0,"duration":900000},{"type":"round","blinds_small":3000,"blinds_big":6000,"ante":0,"duration":900000},{"type":"round","blinds_small":4000,"blinds_big":8000,"ante":0,"duration":900000},{"type":"round","blinds_small":5000,"blinds_big":10000,"ante":0,"duration":600000},{"type":"round","blinds_small":7000,"blinds_big":14000,"ante":0,"duration":600000},{"type":"round","blinds_small":10000,"blinds_big":20000,"ante":0,"duration":600000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03],"chipvalues":[{"color":"white","value":50},{"color":"green","value":100},{"color":"blue","value":500},{"color":"red","value":1000},{"color":"black","value":5000}]}}')
+    t && t('{"default":{"meta":{"name":"Default"},"parts":[{"type":"round","blinds_small":50,"blinds_big":50,"ante":0,"duration":1800000},{"type":"round","blinds_small":50,"blinds_big":100,"ante":0,"duration":1800000},{"type":"round","blinds_small":100,"blinds_big":150,"ante":0,"duration":1800000},{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":1800000},{"type":"round","blinds_small":150,"blinds_big":300,"ante":0,"duration":1800000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":1800000},{"type":"break","duration":600000},{"type":"round","blinds_small":300,"blinds_big":600,"ante":0,"duration":1800000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":1800000},{"type":"round","blinds_small":500,"blinds_big":1000,"ante":0,"duration":1500000},{"type":"round","blinds_small":700,"blinds_big":1500,"ante":0,"duration":1500000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":1200000},{"type":"round","blinds_small":1500,"blinds_big":3000,"ante":0,"duration":1200000},{"type":"round","blinds_small":2000,"blinds_big":4000,"ante":0,"duration":900000},{"type":"round","blinds_small":3000,"blinds_big":6000,"ante":0,"duration":900000},{"type":"round","blinds_small":4000,"blinds_big":8000,"ante":0,"duration":900000},{"type":"round","blinds_small":5000,"blinds_big":10000,"ante":0,"duration":600000},{"type":"round","blinds_small":7000,"blinds_big":15000,"ante":0,"duration":600000},{"type":"round","blinds_small":10000,"blinds_big":20000,"ante":0,"duration":600000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03],"chipvalues":[{"color":"white","value":"50"},{"color":"blue","value":"100"},{"color":"green","value":"500"},{"color":"red","value":"1K"},{"color":"black","value":"5K"},{"color":"yellow","value":"10K"}]}}')
 }
 ,
 function(e) {
@@ -6907,7 +6982,7 @@ function(e) {
             },
             prizes: [.55, .2, .15, .07, .03],
             /*chipvalues: [{"color":"white","value":5},{"color":"red","value":25},{"color":"green","value":100},{"color":"blue","value":500},{"color":"black","value":1000}]*/
-            chipvalues: [{"color":"white","value":50},{"color":"green","value":100},{"color":"blue","value":500},{"color":"red","value":1000},{"color":"black","value":5000}]
+            chipvalues: [{"color":"white","value":"50"},{"color":"blue","value":"100"},{"color":"green","value":"500"},{"color":"red","value":"1K"},{"color":"black","value":"5K"},{"color":"yellow","value":"10K"}]
         }
     }, a = "presets2"
     , o = ''//, o = '{     "tpt_home_game":{"meta":{"name":"Home Game"},"parts":[{"type":"round","blinds_small":10,"blinds_big":20,"ante":0,"duration":600000},{"type":"round","blinds_small":15,"blinds_big":30,"ante":0,"duration":600000},{"type":"round","blinds_small":20,"blinds_big":40,"ante":0,"duration":600000},{"type":"round","blinds_small":25,"blinds_big":50,"ante":0,"duration":600000},{"type":"round","blinds_small":50,"blinds_big":100,"ante":0,"duration":600000},{"type":"round","blinds_small":75,"blinds_big":150,"ante":0,"duration":600000},{"type":"break","duration":600000},{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":600000},{"type":"round","blinds_small":150,"blinds_big":300,"ante":0,"duration":600000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":600000},{"type":"round","blinds_small":300,"blinds_big":600,"ante":0,"duration":600000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":600000},{"type":"round","blinds_small":500,"blinds_big":1000,"ante":0,"duration":600000},{"type":"break","duration":600000},{"type":"round","blinds_small":600,"blinds_big":1200,"ante":0,"duration":600000},{"type":"round","blinds_small":800,"blinds_big":1600,"ante":0,"duration":600000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":600000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03]},     "tpt_turbo":{"meta":{"name":"Turbo"},"parts":[{"type":"round","blinds_small":10,"blinds_big":20,"ante":0,"duration":300000},{"type":"round","blinds_small":20,"blinds_big":40,"ante":0,"duration":300000},{"type":"round","blinds_small":50,"blinds_big":100,"ante":0,"duration":300000},{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":300000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":300000},{"type":"break","duration":300000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":300000},{"type":"round","blinds_small":600,"blinds_big":1200,"ante":0,"duration":300000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":300000},{"type":"round","blinds_small":1500,"blinds_big":3000,"ante":0,"duration":300000},{"type":"round","blinds_small":2500,"blinds_big":4000,"ante":0,"duration":300000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03]},     "tpt_championship":{"meta":{"name":"Championship"},"parts":[{"type":"round","blinds_small":100,"blinds_big":200,"ante":0,"duration":600000},{"type":"round","blinds_small":200,"blinds_big":400,"ante":0,"duration":600000},{"type":"round","blinds_small":300,"blinds_big":600,"ante":0,"duration":600000},{"type":"round","blinds_small":400,"blinds_big":800,"ante":0,"duration":600000},{"type":"round","blinds_small":500,"blinds_big":1000,"ante":0,"duration":600000},{"type":"round","blinds_small":600,"blinds_big":1200,"ante":0,"duration":600000},{"type":"break","duration":600000},{"type":"round","blinds_small":800,"blinds_big":1600,"ante":0,"duration":600000},{"type":"round","blinds_small":1000,"blinds_big":2000,"ante":0,"duration":600000},{"type":"round","blinds_small":1500,"blinds_big":3000,"ante":0,"duration":600000},{"type":"round","blinds_small":2000,"blinds_big":4000,"ante":0,"duration":600000},{"type":"round","blinds_small":3000,"blinds_big":6000,"ante":0,"duration":600000},{"type":"round","blinds_small":4000,"blinds_big":8000,"ante":0,"duration":600000},{"type":"break","duration":600000},{"type":"round","blinds_small":5000,"blinds_big":10000,"ante":0,"duration":600000},{"type":"round","blinds_small":6000,"blinds_big":12000,"ante":0,"duration":600000},{"type":"round","blinds_small":8000,"blinds_big":16000,"ante":0,"duration":600000}],"rules":{"entrants":6,"buy_in":50,"starting_chips":1E3,"add_on_money":50,"add_on_chips":1E3,"re_buy_money":50,"re_buy_chips":1E3},"prizes":[0.55, 0.20, 0.15, 0.07, 0.03]}     }'
@@ -7030,7 +7105,13 @@ function(e) {
                                 //only use the stored settings from localstorage if it contains a version number,
                                 // this means that the settings of all clients that do not yet have a version number will be reset to the new defaults
                                 pts.parts && (e.default.parts = pts.parts);
-                                pts.chipvalues && (e.default.chipvalues = pts.chipvalues);
+                                if (pts.chipvalues) {
+                                    for (var c = 0; c < pts.chipvalues.length; c++) {
+                                        pts.chipvalues[c].color = pts.chipvalues[c].color.toString().toLowerCase();
+                                        pts.chipvalues[c].value = pts.chipvalues[c].value.toString(); //old number values from version 1 should be converted to string values
+                                        e.default.chipvalues[c] = pts.chipvalues[c];
+                                    }
+                                }
                                 pts.preferences && (
                                   typeof pts.preferences.sound !== "undefined" && (preferences.sound = !!pts.preferences.sound),
                                   typeof pts.preferences.showChipValues !== "undefined" && (preferences.showChipValues = !!pts.preferences.showChipValues),
@@ -7436,8 +7517,8 @@ window.onresize = hideColorsPopup;
         }),
         e.chipvalues.forEach(function(e) {
             t.chipvalues.push({
-                color: e.color.value,
-                value: e.value.value()
+                color: e.color.get(),
+                value: e.value.get()
             });
         }),
         t.players = e.players.map(function(e) {
@@ -7577,7 +7658,7 @@ function(e) {
         }),
         this.prizes = e.prizes.slice(),
         this.chipvalues = e.chipvalues.slice();
-        for (var b = 0; b < 5; b++) {
+        for (var b = 0; b < 6; b++) {
             (function(b) {
                 i.chipvalues[b].color.subscribe(function() {
                     E.publish("game.chip.color", {data: [b, i]});
@@ -7590,10 +7671,12 @@ function(e) {
                         hideColorsPopup();
                     } else {
                         chipSelected = b;
-                        var cv = i.chipvalues[b].color.value,
+                        var cv = i.chipvalues[b].color.get(),
                         btnRect = this.parentNode.getBoundingClientRect();
                         cv.slice(0,1) == "#" && $("#chipColorCustom").val(cv);
-                        $("#chipColorsPopup").css({left: btnRect.left + document.getElementById("preferencesPageContainer").scrollLeft, top: Math.max(Math.min(btnRect.bottom, document.documentElement.clientHeight - 184 - 3), 0) + document.getElementById("preferencesPageContainer").scrollTop}).show();
+                        $(".chip-color").removeClass("selected");
+                        $("#chipColor" + (cv == "white" ? "1" : cv == "red" ? "2" : cv == "green" ? "3" : cv == "blue" ? "4" : cv == "black" ? "5" : cv == "yellow" ? "6" : cv.slice(0,1) == "#" ? "Custom" : cv == "none" ? "None" : "")).addClass("selected");
+                        $("#chipColorsPopup").css({left: btnRect.left + document.getElementById("preferencesPageContainer").scrollLeft, top: Math.max(Math.min(btnRect.bottom, document.documentElement.clientHeight - 244 - 3) + document.getElementById("preferencesPageContainer").scrollTop, 100)}).show();
                     }
                 });
             })(b);
@@ -7602,36 +7685,46 @@ function(e) {
             E.publish("game_chip_value_change", {data: [b, i]});
         }
         $("#chipColor1").click(function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = "white");
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("white"));
             hideColorsPopup();
         });
         $("#chipColor2").click(function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = "red");
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("red"));
             hideColorsPopup();
         });
         $("#chipColor3").click(function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = "green");
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("green"));
             hideColorsPopup();
         });
         $("#chipColor4").click(function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = "blue");
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("blue"));
             hideColorsPopup();
         });
         $("#chipColor5").click(function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = "black");
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("black"));
+            hideColorsPopup();
+        });
+        $("#chipColor6").click(function (e) {
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("yellow"));
+            hideColorsPopup();
+        });
+        $("#chipColorNone").click(function (e) {
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set("none"));
             hideColorsPopup();
         });
         document.getElementById("chipColorCustom").onchange = function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = validateHexColor(this.value));
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set(validateHexColor(this.value)));
             hideColorsPopup();
         };
         document.getElementById("chipColorCustom").onclick = document.getElementById("chipColorCustom").oninput = function (e) {
-            chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = validateHexColor(this.value));
+            chipSelected >= 0 && (i.chipvalues[chipSelected].color.set(validateHexColor(this.value)));
+            $(".chip-color").removeClass("selected");
+            $(this).addClass("selected");
         };
         if (isIE) {
             document.getElementById("chipColorCustom").onkeypress = function(e) {
                 if (e.keyCode == 13) {
-                    chipSelected >= 0 && (i.chipvalues[chipSelected].color.value = validateHexColor(this.value));
+                    chipSelected >= 0 && (i.chipvalues[chipSelected].color.set(validateHexColor(this.value)));
                     hideColorsPopup();
                 }
             };
@@ -8085,27 +8178,8 @@ function(e) {
 }(this),
 function(e) {
     var t = function(e) {
-        this.color = {
-            val: e.color,
-            listener: null,
-            get value() {
-                return this.val;
-            },
-            set value(val) {
-                this.val = val;
-                this.listener && this.listener.call(this);
-            },
-            subscribe: function(listener) {
-                this.listener = listener;
-            }
-        };
-        this.value = new Value({
-            value: +e.value,
-            min: 0,
-            max: 2147483647,
-            nudge: 1,
-            unformat: parseInt
-        });
+        this.color = new Text(e.color);
+        this.value = new Text(e.value);
     };
     e.Chipvalue = t;
 }(this),
@@ -8626,14 +8700,14 @@ E.bind("tournament", function(e, t) {
         v()
     });
     E.bind("game_chip_color_change", function(e, t, n) {
-        if (n.chipvalues[t].color.value.slice(0,1) == "#") {
-            $("#chip"+(t+1).toString()+",#chip_button"+(t+1).toString()).removeClass("chip-white chip-red chip-green chip-blue chip-black").css("background-image", "url('data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg width="100" height="100" viewBox="0 0 3000 3000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><circle fill="'+n.chipvalues[t].color.value+'" cx="1500" cy="1500" r="1500"/><path fill="#FEFEFE" d="M1229 2975c181,33 365,32 542,-1l0 -328 -542 0 0 329zm833 -751l42 72c-67,51 -140,93 -217,125l-42 -73c77,-31 150,-73 217,-124zm-437 183l0 84c-82,11 -166,11 -250,1l0 -84c84,11 168,11 250,-1zm-729 -110l42 -73c32,25 67,49 104,70 36,21 74,39 112,55l-42 73c-38,-16 -75,-35 -112,-56 -37,-21 -71,-44 -104,-69zm-808 -295l284 -164 271 469 -285 165c-119,-140 -209,-300 -270,-470zm2261 -156l73 42c-16,38 -35,75 -56,112 -21,37 -44,71 -69,104l-73 -42c25,-32 49,-67 70,-104 21,-36 39,-74 55,-112zm-1646 -950l73 42c-25,32 -49,67 -70,104 -21,36 -39,74 -55,112l-73 -42c16,-38 35,-75 56,-112 21,-37 44,-71 69,-104zm410 -317l42 73c-77,31 -150,73 -217,124l-42 -72c67,-51 140,-93 217,-125zm512 -71l0 84c-84,-11 -168,-11 -250,1l0 -84c83,-11 166,-11 250,-1zm221 143l42 -73c38,16 75,35 112,56 37,21 71,44 104,69l-42 73c-32,-25 -67,-49 -104,-70 -36,-21 -74,-39 -112,-55zm561 724l84 0c11,83 11,166 1,250l-84 0c11,-83 11,-168 -1,-250zm-1899 0l84 0c-11,84 -11,168 1,250l-84 0c-11,-82 -11,-166 -1,-250zm1716 -437l72 -42c51,67 93,140 125,217l-73 42c-31,-77 -73,-150 -124,-217zm-1645 949l73 -42c31,77 73,150 124,217l-72 42c-51,-67 -93,-140 -125,-217zm2333 -889c-61,-170 -151,-330 -270,-470l-285 165 271 469 284 -164zm-1141 -973l0 329 -542 0 0 -328c178,-33 361,-34 542,-1zm-1413 503l285 165 -271 469 -285 -165c30,-84 68,-167 114,-247 46,-80 99,-154 157,-222zm2284 1944c58,-68 111,-142 157,-222 46,-80 84,-163 114,-247l-285 -165 -271 469 285 165z"/></svg>')+"')");
+        if (n.chipvalues[t].color.get().slice(0,1) == "#") {
+            $("#chip"+(t+1).toString()+",#chip_button"+(t+1).toString()).removeClass("chip-white chip-red chip-green chip-blue chip-black chip-yellow chip-none").css("background-image", "url('data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg width="100" height="100" viewBox="0 0 3000 3000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><circle fill="'+n.chipvalues[t].color.get()+'" cx="1500" cy="1500" r="1500"/><path fill="#FEFEFE" d="M1229 2975c181,33 365,32 542,-1l0 -328 -542 0 0 329zm833 -751l42 72c-67,51 -140,93 -217,125l-42 -73c77,-31 150,-73 217,-124zm-437 183l0 84c-82,11 -166,11 -250,1l0 -84c84,11 168,11 250,-1zm-729 -110l42 -73c32,25 67,49 104,70 36,21 74,39 112,55l-42 73c-38,-16 -75,-35 -112,-56 -37,-21 -71,-44 -104,-69zm-808 -295l284 -164 271 469 -285 165c-119,-140 -209,-300 -270,-470zm2261 -156l73 42c-16,38 -35,75 -56,112 -21,37 -44,71 -69,104l-73 -42c25,-32 49,-67 70,-104 21,-36 39,-74 55,-112zm-1646 -950l73 42c-25,32 -49,67 -70,104 -21,36 -39,74 -55,112l-73 -42c16,-38 35,-75 56,-112 21,-37 44,-71 69,-104zm410 -317l42 73c-77,31 -150,73 -217,124l-42 -72c67,-51 140,-93 217,-125zm512 -71l0 84c-84,-11 -168,-11 -250,1l0 -84c83,-11 166,-11 250,-1zm221 143l42 -73c38,16 75,35 112,56 37,21 71,44 104,69l-42 73c-32,-25 -67,-49 -104,-70 -36,-21 -74,-39 -112,-55zm561 724l84 0c11,83 11,166 1,250l-84 0c11,-83 11,-168 -1,-250zm-1899 0l84 0c-11,84 -11,168 1,250l-84 0c-11,-82 -11,-166 -1,-250zm1716 -437l72 -42c51,67 93,140 125,217l-73 42c-31,-77 -73,-150 -124,-217zm-1645 949l73 -42c31,77 73,150 124,217l-72 42c-51,-67 -93,-140 -125,-217zm2333 -889c-61,-170 -151,-330 -270,-470l-285 165 271 469 284 -164zm-1141 -973l0 329 -542 0 0 -328c178,-33 361,-34 542,-1zm-1413 503l285 165 -271 469 -285 -165c30,-84 68,-167 114,-247 46,-80 99,-154 157,-222zm2284 1944c58,-68 111,-142 157,-222 46,-80 84,-163 114,-247l-285 -165 -271 469 285 165z"/></svg>')+"')");
         } else {
-            $("#chip"+(t+1).toString()+",#chip_button"+(t+1).toString()).removeClass("chip-white chip-red chip-green chip-blue chip-black").css("background-image", "").addClass("chip-"+n.chipvalues[t].color.value);
+            $("#chip"+(t+1).toString()+",#chip_button"+(t+1).toString()).removeClass("chip-white chip-red chip-green chip-blue chip-black chip-yellow chip-none").css("background-image", "").addClass("chip-"+n.chipvalues[t].color.get());
         }
     });
     E.bind("game_chip_value_change", function(e, t, n) {
-        $("#chip_value"+(t+1).toString()).text(n.chipvalues[t].value.value().toString());
+        $("#chip_value"+(t+1).toString()).text(n.chipvalues[t].value.get());
     });
     var game_started = false;
     E.bind("game_start", function() {
@@ -8659,7 +8733,7 @@ E.bind("tournament", function(e, t) {
     }
     function saveSettings(t) {
         if (navigator.cookieEnabled && typeof Storage !== "undefined" && window.localStorage) {
-            var d = {parts: [], chipvalues: [], preferences: preferences, version: 1};
+            var d = {parts: [], chipvalues: [], preferences: preferences, version: 2};
             t.parts.forEach(function(e) {
                 if (e.type === "round") {
                     d.parts.push({"type": e.type, "blinds_small": e.blinds_small.value(), "blinds_big": e.blinds_big.value(), "ante": e.ante.value(), "duration": e.duration.value()});
@@ -8668,7 +8742,7 @@ E.bind("tournament", function(e, t) {
                 }
             });
             t.chipvalues.forEach(function(e) {
-                d.chipvalues.push({"color": e.color.value, "value": e.value.value()});
+                d.chipvalues.push({"color": e.color.get(), "value": e.value.get()});
             });
             try {
                 localStorage.PokerTimerSettings = JSON.stringify(d);
@@ -8843,6 +8917,7 @@ E.bind("origin.version.block", function() {
 E.bind("origin.message", function(e, t) {
     UI.message.show(t)
 });
+isIE && $("#chipColorCustomOverlay").hide();
 function openFullscreen() {
   var elem = document.documentElement;
   if (elem.requestFullscreen) {
@@ -8900,8 +8975,8 @@ function isFullscreen() {
                             <div id="preferencesPageContainer" class="preferences">
                                 <div id="preferencesPageWrapper">
                                     <div id="preferencesPage">
-                                        <label class="checkbox-container"><span class="checkbox-text">Sound</span><input type="checkbox" id="cSound" checked="checked"><span class="checkbox-mark"></span></label><br>
-                                        <label class="checkbox-container"><span class="checkbox-text">Show Chip Values</span><input type="checkbox" id="cShowChipValues" checked="checked"><span class="checkbox-mark"></span></label><br>
+                                        <label class="checkbox-container" title="Plays a sound warning before the next blindlevel"><span class="checkbox-text">Sound</span><input type="checkbox" id="cSound" checked="checked"><span class="checkbox-mark"></span></label><br>
+                                        <label class="checkbox-container" title="Shows chips with denominations on the timer screen"><span class="checkbox-text">Show Chip Values</span><input type="checkbox" id="cShowChipValues" checked="checked"><span class="checkbox-mark"></span></label><br>
                                         <div id="chips_config_wrapper">
                                             <span id="chips_config_title">Change colors and values</span>
                                             <div id="chips_config">
@@ -8911,19 +8986,21 @@ function isFullscreen() {
                                                     </div><div class="chip-config-button-wrap"><button id="chip_button3" class="chip-config-button"></button>
                                                     </div><div class="chip-config-button-wrap"><button id="chip_button4" class="chip-config-button"></button>
                                                     </div><div class="chip-config-button-wrap"><button id="chip_button5" class="chip-config-button"></button>
+                                                    </div><div class="chip-config-button-wrap"><button id="chip_button6" class="chip-config-button"></button>
                                                     </div>
                                                 </div>
                                                 <div id="chips_config_inputs">
-                                                    <div id="chip_input_wrap1" class="chip-config-input-wrap"><input type="number" min="0" max="2147483647" name="value">
-                                                    </div><div id="chip_input_wrap2" class="chip-config-input-wrap"><input type="number" min="0" max="2147483647" name="value">
-                                                    </div><div id="chip_input_wrap3" class="chip-config-input-wrap"><input type="number" min="0" max="2147483647" name="value">
-                                                    </div><div id="chip_input_wrap4" class="chip-config-input-wrap"><input type="number" min="0" max="2147483647" name="value">
-                                                    </div><div id="chip_input_wrap5" class="chip-config-input-wrap"><input type="number" min="0" max="2147483647" name="value">
+                                                    <div id="chip_input_wrap1" class="chip-config-input-wrap"><input type="text" name="value">
+                                                    </div><div id="chip_input_wrap2" class="chip-config-input-wrap"><input type="text" name="value">
+                                                    </div><div id="chip_input_wrap3" class="chip-config-input-wrap"><input type="text" name="value">
+                                                    </div><div id="chip_input_wrap4" class="chip-config-input-wrap"><input type="text" name="value">
+                                                    </div><div id="chip_input_wrap5" class="chip-config-input-wrap"><input type="text" name="value">
+                                                    </div><div id="chip_input_wrap6" class="chip-config-input-wrap"><input type="text" name="value">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <label class="checkbox-container"><span class="checkbox-text">Prevent Screensaver or Sleep Mode</span><input type="checkbox" id="cPreventSleep" checked="checked"><span class="checkbox-mark"></span></label><br>
+                                        <label class="checkbox-container" title="Prevents screensaver and system going into sleep mode while the timer is running"><span class="checkbox-text">Prevent Screensaver and Sleep Mode</span><input type="checkbox" id="cPreventSleep" checked="checked"><span class="checkbox-mark"></span></label><br>
                                         <!--
                                         <hr id="preferences_hr">
                                         <span id="preferences_footer"><span style="font-weight:bold;">Tip:</span> turn off your screensaver and device sleep mode before starting the timer</span>
@@ -8936,7 +9013,10 @@ function isFullscreen() {
                                     <button id="chipColor3" class="chip-color">green</button>
                                     <button id="chipColor4" class="chip-color">blue</button>
                                     <button id="chipColor5" class="chip-color">black</button>
-                                    <input id="chipColorCustom" type="color" value="#dc50dc">
+                                    <button id="chipColor6" class="chip-color">yellow</button>
+                                    <input id="chipColorCustom" type="color" class="chip-color" value="#dc50dc">
+                                    <button id="chipColorCustomOverlay" class="chip-color" tabindex="-1">custom</button>
+                                    <button id="chipColorNone" class="chip-color">none</button>
                                 </div>
                             </div>
                             <ul class="headers blind-structure">
@@ -9181,6 +9261,7 @@ function isFullscreen() {
                                         </div><div id="chip3" class="chip"><div id="chip_value3" class="chip-value"></div>
                                         </div><div id="chip4" class="chip"><div id="chip_value4" class="chip-value"></div>
                                         </div><div id="chip5" class="chip"><div id="chip_value5" class="chip-value"></div>
+                                        </div><div id="chip6" class="chip"><div id="chip_value6" class="chip-value"></div>
                                         </div>
                                     </div>
                                 </div>
